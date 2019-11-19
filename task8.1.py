@@ -1,4 +1,6 @@
-# Добавьте в класс Rate параметр diff (со значениями True или False),
+# Задание 1: Напишите функцию, которая возвращает название валюты (поле ‘Name’) с максимальным значением курса с помощью сервиса https://www.cbr-xml-daily.ru/daily_json.js
+
+# Задание 2: Добавьте в класс Rate параметр diff (со значениями True или False),
 # который в случае значения True в методах eur и usd будет возвращать не курс валюты, а изменение по сравнению в прошлым значением.
 # Считайте, self.diff будет принимать значение True только при возврате значения курса.
 # При отображении всей информации о валюте он не используется.
@@ -72,5 +74,11 @@ class Rate:
         """Возвращает курс бразильского реала на сегодня в формате self.format"""
         return self.make_format('BRL')
 
-print(Rate().make_format('USD','True'))
+    def name(self,currency):
+        response = self.exchange_rates()
+        return response[currency]['Name'],response[currency]['Value']
+
+print(Rate().name('BRL')) # принт исполнения Задание 1
+print(Rate().make_format('USD','True')) # принт исполнения Задания 2 (git)
+
 
