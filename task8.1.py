@@ -74,11 +74,18 @@ class Rate:
         """Возвращает курс бразильского реала на сегодня в формате self.format"""
         return self.make_format('BRL')
 
-    def name(self,currency):
+    def name(self):
         response = self.exchange_rates()
-        return response[currency]['Name'],response[currency]['Value']
+        max = 0
+        my_dict ={}
+        for key, value in response.items():
+            if value['Value'] > max:
+                max = value['Value']
+                my_dict= {key:value['Value']}
+        return my_dict
 
-print(Rate().name('BRL')) # принт исполнения Задание 1
+
+print(Rate().name()) # принт исполнения Задание 1
 print(Rate().make_format('USD','True')) # принт исполнения Задания 2 (git)
 
 
